@@ -1,3 +1,41 @@
 [gd_scene format=3 uid="uid://dkbjfg1nk6qfh"]
 
+[sub_resource type="Environment" id="Environment_ib1hl"]
+
 [node name="Node3D" type="Node3D" unique_id=1343320943]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=743973824]
+environment = SubResource("Environment_ib1hl")
+
+[node name="Mocked Character" type="CSGBox3D" parent="." unique_id=1306927728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(1, 2, 1)
+
+[node name="Level" type="Node3D" parent="." unique_id=535291944]
+
+[node name="Wall_001" type="CSGBox3D" parent="Level" unique_id=1818251483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25.5)
+size = Vector3(50, 2, 1)
+
+[node name="Wall_002" type="CSGBox3D" parent="Level" unique_id=2077356892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25.5)
+size = Vector3(50, 2, 1)
+
+[node name="Wall_003" type="CSGBox3D" parent="Level" unique_id=516965921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 1, 0)
+size = Vector3(1, 2, 50)
+
+[node name="Wall_004" type="CSGBox3D" parent="Level" unique_id=1910161125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 1, 0)
+size = Vector3(1, 2, 50)
+
+[node name="Floor" type="CSGBox3D" parent="Level" unique_id=1746779724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(50, 1, 50)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2011213630]
+transform = Transform3D(0.60181487, 0.5155317, -0.6099556, 0, 0.7637471, 0.64551556, 0.7986356, -0.38848087, 0.45963436, -24.510609, 19.85556, 22.109404)
+fov = 69.86218
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1650723946]
+transform = Transform3D(0.5565991, -0.5362825, 0.6345066, -2.9802326e-08, 0.7637468, 0.6455159, -0.8307813, -0.35929355, 0.42510074, 34.981853, 19.85556, 22.109396)
