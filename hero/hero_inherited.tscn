@@ -3,7 +3,72 @@
 [ext_resource type="PackedScene" uid="uid://dx4onpvyr0oic" path="res://assets/imported/Hero.glb" id="1_nvi08"]
 [ext_resource type="Material" uid="uid://dyokxotg8xwr8" path="res://assets/materials/character_material.tres" id="2_566b1"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_566b1"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dhtkq"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a6aq8"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_yog3e"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dhtkq")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"Idle"
+blend_point_1/node = SubResource("AnimationNodeAnimation_a6aq8")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1nclk"]
+animation = &"Dash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_566b1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1nclk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s2pbx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qex7b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dhtkq"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ib1hl"]
+states/Attack/node = SubResource("AnimationNodeAnimation_566b1")
+states/Attack/position = Vector2(791, 399)
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_yog3e")
+states/BlendSpace1D/position = Vector2(598, 100)
+states/Dash/node = SubResource("AnimationNodeAnimation_1nclk")
+states/Dash/position = Vector2(401, 399)
+states/End/position = Vector2(1047, 100)
+transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_566b1"), "BlendSpace1D", "Attack", SubResource("AnimationNodeStateMachineTransition_1nclk"), "BlendSpace1D", "Dash", SubResource("AnimationNodeStateMachineTransition_s2pbx"), "Dash", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_qex7b"), "Attack", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_dhtkq")]
+
 [node name="Hero2" unique_id=175640064 instance=ExtResource("1_nvi08")]
 
-[node name="Hero" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1637579679) index="0" unique_id=1581865501]
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(472394227) index="0" unique_id=1440601017]
+bones/1/position = Vector3(0.04922396, -0.019321002, 0.766621)
+bones/1/rotation = Quaternion(0.83539677, -0.098040104, -0.063038275, 0.5371468)
+bones/2/rotation = Quaternion(-0.25073647, -0.018880893, 0.003327709, 0.9678656)
+bones/3/rotation = Quaternion(-0.26498273, -0.116826095, 0.9557354, -0.052016318)
+bones/4/rotation = Quaternion(0.16015813, 0.082184516, 0.25619543, 0.9497153)
+bones/5/rotation = Quaternion(0.052343145, 0.13904949, 0.011611431, 0.988833)
+bones/6/rotation = Quaternion(0.62128925, -0.2262161, 0.74090964, 0.11780906)
+bones/7/rotation = Quaternion(0.28373727, -0.07282327, -0.4538776, 0.84153736)
+bones/8/rotation = Quaternion(0.020070994, -0.026521914, -0.2497444, 0.9677404)
+bones/9/rotation = Quaternion(0.47060385, 0.111479595, -0.049109638, 0.8738951)
+bones/10/rotation = Quaternion(-0.54978913, 0.005501396, -0.0018645466, 0.8352833)
+bones/11/rotation = Quaternion(-0.48605323, 0.33611912, 0.6750357, -0.44170475)
+bones/12/rotation = Quaternion(-0.008629872, 2.2118908e-07, -0.40297133, 0.915172)
+bones/13/rotation = Quaternion(-0.007974385, -0.19944185, 0.64500433, 0.73765093)
+bones/14/rotation = Quaternion(0.6466042, 0.08812286, 0.7171773, 0.24452844)
+bones/15/rotation = Quaternion(-0.006380052, -2.6650378e-07, 0.29791558, 0.9545709)
+bones/16/rotation = Quaternion(0.07547398, 0.23022692, -0.8249966, 0.5105682)
+
+[node name="Hero" parent="Armature/Skeleton3D" index="0" unique_id=137306077]
 material_override = ExtResource("2_566b1")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=1373617426]
+tree_root = SubResource("AnimationNodeStateMachine_ib1hl")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendSpace1D/blend_position = -0.0020618439

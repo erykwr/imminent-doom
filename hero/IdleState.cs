@@ -4,11 +4,6 @@ namespace imminent_doom.hero;
 
 public partial class IdleState : State
 {
-	
-	public override void Enter()
-	{
-		AnimationPlayer?.Play("Idle");
-	}
 
 	public override void HandleInput(InputEvent @event)
 	{

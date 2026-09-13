@@ -5,6 +5,7 @@ namespace imminent_doom.hero;
 public partial class State : Node
 {
 	[Export] public string AnimationPlayerNodePath = "../../Hero2/AnimationPlayer";
+	[Export] public string AnimationTreeNodePath = "../../Hero2/AnimationTree";
 	[Export] public string CharacterBody3DNodePath = "../..";
 	[Export] public string CameraNodePath = "../../../Camera3D";
 	[Export] public string CollisionShape3DNodePath = "../../CollisionShape3D";
@@ -17,6 +18,8 @@ public partial class State : Node
 	
 	protected AnimationPlayer AnimationPlayer;
 	protected CharacterBody3D CharacterBody3D;
+	protected AnimationTree AnimationTree;
+	protected AnimationNodeStateMachinePlayback Playback;
 	protected Camera3D Camera;
 	protected CollisionShape3D CollisionShape3D;
 	
@@ -24,6 +27,8 @@ public partial class State : Node
 	{
 		AnimationPlayer = GetNode<AnimationPlayer>(AnimationPlayerNodePath);
 		CharacterBody3D = GetNode<CharacterBody3D>(CharacterBody3DNodePath);
+		AnimationTree = GetNode<AnimationTree>(AnimationTreeNodePath);
+		Playback = AnimationTree?.Get("parameters/playback").As<AnimationNodeStateMachinePlayback>();
 		Camera = GetNode<Camera3D>(CameraNodePath);
 		CollisionShape3D = GetNode<CollisionShape3D>(CollisionShape3DNodePath);
 		if (AnimationPlayer == null)
@@ -41,6 +46,14 @@ public partial class State : Node
 		if (CollisionShape3D == null)
 		{
 			GD.PrintErr("Could not find collision shape 3D");
+		}
+		if (AnimationTree == null)
+		{
+			GD.Print("Could not find animation tree");
+		}
+		if (Playback == null)
+		{
+			GD.PrintErr("Could not find playback");
 		}
 	}
 	
@@ -93,6 +106,10 @@ public partial class State : Node
 
 		CharacterBody3D.Velocity = velocity;
 		CharacterBody3D.MoveAndSlide();
+		
+		Vector2 horizontalVelocity = new Vector2(CharacterBody3D.Velocity.X, CharacterBody3D.Velocity.Z);
+		float speed = Mathf.Clamp(horizontalVelocity.Length() / Speed, 0f, 1f);
+		AnimationTree.Set("parameters/BlendSpace1D/blend_position", speed);
 	}
 	
 	protected bool IsMoving()

@@ -8,28 +8,24 @@ public partial class AttackState : State
 	
 	public override void Enter()
 	{
-		AnimationPlayer?.Play(_animationName);
-		if (AnimationPlayer != null)
+		Playback?.Travel(_animationName);
+	}
+
+	public override void HandleInput(InputEvent @event)
+	{
+		if (Input.IsActionJustReleased("attack"))
 		{
-			AnimationPlayer.AnimationFinished += AnimationFinished;
+			EmitSignal(State.SignalName.Transitioned, this, "Idle");
 		}
+	}
+
+	public override void UpdateMovement(float delta)
+	{
 	}
 
 	public override void Exit()
 	{
-		if (AnimationPlayer != null)
-		{
-			AnimationPlayer.AnimationFinished -= AnimationFinished;
-		}
-	}
-
-
-	private void AnimationFinished(StringName animationName)
-	{
-		if (animationName == _animationName)
-		{
-			EmitSignal(State.SignalName.Transitioned, this, "Idle");
-		}
+		Playback?.Travel("BlendSpace1D");
 	}
 
 }

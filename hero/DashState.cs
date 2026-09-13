@@ -19,7 +19,12 @@ public partial class DashState : State
 		_dashEnd = FindDashLanding(GetForwardDirection());
 		_dashFrame = 0;
 
-		AnimationPlayer?.Play("Dash", customBlend: 0.05);
+		Playback?.Travel("Dash");
+	}
+
+	public override void Exit()
+	{
+		Playback?.Travel("BlendSpace1D");
 	}
 
 	public override void PhysicsUpdate(float delta)
