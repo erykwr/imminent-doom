@@ -5,5 +5,5 @@
 
 [node name="Hero2" unique_id=175640064 instance=ExtResource("1_nvi08")]
 
-[node name="Hero" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(185291288) index="0" unique_id=702144349]
+[node name="Hero" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1637579679) index="0" unique_id=1581865501]
 material_override = ExtResource("2_566b1")

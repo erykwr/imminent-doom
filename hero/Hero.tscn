@@ -1,17 +1,41 @@
 [gd_scene format=3 uid="uid://drcasr6buc55h"]
 
-[ext_resource type="Script" uid="uid://t63ncoy0ysa1" path="res://hero/Hero.cs" id="1_rium6"]
 [ext_resource type="PackedScene" uid="uid://c58odmh8q0o0r" path="res://hero/hero_inherited.tscn" id="1_ud4mk"]
+[ext_resource type="Script" uid="uid://b5xkvbu35hqo2" path="res://hero/StateMachine.cs" id="2_rium6"]
+[ext_resource type="Script" uid="uid://buyjnopyu2crb" path="res://hero/IdleState.cs" id="3_r1hgc"]
+[ext_resource type="Script" uid="uid://cn6gdeuohwh3l" path="res://hero/RunState.cs" id="4_q8o41"]
+[ext_resource type="Script" uid="uid://m6itfkafm0wp" path="res://hero/DashState.cs" id="5_2c63q"]
+[ext_resource type="Script" uid="uid://jq1cg8i65ydx" path="res://hero/AttackState.cs" id="6_w3da4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
 radius = 0.49316406
 height = 1.7099609
 
 [node name="Hero" type="CharacterBody3D" unique_id=2090337248]
-script = ExtResource("1_rium6")
 
 [node name="Hero2" parent="." unique_id=175640064 instance=ExtResource("1_ud4mk")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=348740540]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85498047, 0)
 shape = SubResource("CapsuleShape3D_ib1hl")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1583135236]
+script = ExtResource("2_rium6")
+InitialStatePath = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1218965662]
+script = ExtResource("3_r1hgc")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=545477930]
+script = ExtResource("4_q8o41")
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=452030760]
+script = ExtResource("5_2c63q")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1989094703]
+script = ExtResource("6_w3da4")
+
+[connection signal="Transitioned" from="StateMachine/Idle" to="StateMachine" method="OnChildTransitioned"]
+[connection signal="Transitioned" from="StateMachine/Run" to="StateMachine" method="OnChildTransitioned"]
+[connection signal="Transitioned" from="StateMachine/Dash" to="StateMachine" method="OnChildTransitioned"]
+[connection signal="Transitioned" from="StateMachine/Attack" to="StateMachine" method="OnChildTransitioned"]

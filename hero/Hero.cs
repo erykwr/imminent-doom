@@ -17,6 +17,11 @@ public partial class Hero : CharacterBody3D
 
 	[Export] Camera3D Camera { get; set; }
 	private AnimationPlayer _animationPlayer;
+	
+	private Vector3 _dashStart;
+	private Vector3 _dashEnd;
+	private float _dashFrame;
+	private bool _isDashing;
 
 	public override void _Ready()
 	{
@@ -115,10 +120,7 @@ public partial class Hero : CharacterBody3D
 
 	#region Dash
 
-	private Vector3 _dashStart;
-	private Vector3 _dashEnd;
-	private float _dashFrame;
-	private bool _isDashing;
+
 	
 	private Vector3 GetForwardDirection()
 	{
