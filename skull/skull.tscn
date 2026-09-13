@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://72cggqwxkkq"]
+
+[ext_resource type="PackedScene" uid="uid://b6tjww8o27rml" path="res://assets/imported/Skull.glb" id="1_l76jg"]
+[ext_resource type="Script" uid="uid://o21w34sikxia" path="res://skull/Skull.cs" id="2_f0h0g"]
+[ext_resource type="Material" uid="uid://dyokxotg8xwr8" path="res://assets/materials/character_material.tres" id="3_ydjn8"]
+
+[node name="Skull" unique_id=2126691730 instance=ExtResource("1_l76jg")]
+script = ExtResource("2_f0h0g")
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1881906732) index="0" unique_id=399981541]
+bones/1/position = Vector3(1.2921514e-16, -0.024341583, 0.42423952)
+bones/1/rotation = Quaternion(0.7071068, -1.1520234e-07, -1.1520234e-07, 0.7071068)
+bones/2/rotation = Quaternion(0.939553, 5.7419e-08, -1.806922e-07, 0.34240344)
+
+[node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=286454263]
+surface_material_override/0 = ExtResource("3_ydjn8")

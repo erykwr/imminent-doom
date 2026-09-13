@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dyokxotg8xwr8"]
+
+[ext_resource type="Texture2D" uid="uid://c5yu82vqkuog2" path="res://assets/textures/character_gradient_atlas.png" id="1_acgtf"]
+
+[resource]
+albedo_texture = ExtResource("1_acgtf")

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://drcasr6buc55h"]
+
+[ext_resource type="Script" uid="uid://t63ncoy0ysa1" path="res://hero/Hero.cs" id="1_rium6"]
+[ext_resource type="PackedScene" uid="uid://c58odmh8q0o0r" path="res://hero/hero_inherited.tscn" id="1_ud4mk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
+radius = 0.49316406
+height = 1.7099609
+
+[node name="Hero" type="CharacterBody3D" unique_id=2090337248]
+script = ExtResource("1_rium6")
+
+[node name="Hero2" parent="." unique_id=175640064 instance=ExtResource("1_ud4mk")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=348740540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85498047, 0)
+shape = SubResource("CapsuleShape3D_ib1hl")

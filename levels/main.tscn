@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://dkbjfg1nk6qfh"]
 
+[ext_resource type="PackedScene" uid="uid://72cggqwxkkq" path="res://skull/skull.tscn" id="1_2262g"]
+[ext_resource type="Script" uid="uid://c61n460okyiy8" path="res://levels/CopyPosition.cs" id="2_l8qe7"]
+[ext_resource type="PackedScene" uid="uid://drcasr6buc55h" path="res://hero/Hero.tscn" id="2_wdj6m"]
+
 [sub_resource type="Environment" id="Environment_ib1hl"]
 
 [node name="Node3D" type="Node3D" unique_id=1343320943]
@@ -9,6 +13,7 @@ environment = SubResource("Environment_ib1hl")
 
 [node name="Mocked Character" type="CSGBox3D" parent="." unique_id=1306927728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
 size = Vector3(1, 2, 1)
 
 [node name="Level" type="Node3D" parent="." unique_id=535291944]
@@ -30,12 +35,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 1, 0)
 size = Vector3(1, 2, 50)
 
 [node name="Floor" type="CSGBox3D" parent="Level" unique_id=1746779724]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888674, -0.5522995, -0.012463093)
 size = Vector3(50, 1, 50)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=2011213630]
-transform = Transform3D(0.60181487, 0.5155317, -0.6099556, 0, 0.7637471, 0.64551556, 0.7986356, -0.38848087, 0.45963436, -24.510609, 19.85556, 22.109404)
-fov = 69.86218
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1650723946]
-transform = Transform3D(0.5565991, -0.5362825, 0.6345066, -2.9802326e-08, 0.7637468, 0.6455159, -0.8307813, -0.35929355, 0.42510074, 34.981853, 19.85556, 22.109396)
+transform = Transform3D(0.2755386, -0.6205279, 0.7341822, 4.6667004e-08, 0.7637469, 0.6455158, -0.96129, -0.17786454, 0.21044175, -7.5261135, 19.85556, 21.122198)
+
+[node name="Skull" parent="." unique_id=2126691730 instance=ExtResource("1_2262g")]
+transform = Transform3D(-0.561911, 0, -0.8271977, 0, 1, 0, 0.8271977, 0, -0.561911, -3.2328553, 0, 6.123808)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1122926602 node_paths=PackedStringArray("Source")]
+transform = Transform3D(0.7604049, 0.52707595, -0.37944087, 0, 0.58425015, 0.8115736, 0.6494493, -0.6171245, 0.4442667, -7.513661, 5.5125394, 3.8233864)
+script = ExtResource("2_l8qe7")
+Source = NodePath("../Hero")
+
+[node name="Hero" parent="." unique_id=2090337248 node_paths=PackedStringArray("Camera") instance=ExtResource("2_wdj6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0981975, 0, 1.3930922)
+Camera = NodePath("../Camera3D")
