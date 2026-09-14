@@ -1,10 +1,13 @@
 using Godot;
+using imminent_doom.common;
 
 namespace imminent_doom.hero;
 
 public partial class AttackState : State
 {
 	private readonly StringName _animationName = "Attack";
+	
+	[Export] public Area3D Hitbox { get; set; }
 	
 	public override void Enter()
 	{
@@ -28,4 +31,30 @@ public partial class AttackState : State
 		Playback?.Travel("BlendSpace1D");
 	}
 
+	public void HitStarted()
+	{
+		if (Hitbox != null)
+		{
+			Hitbox.Monitoring = true;
+		}
+	}
+
+	public void HitFinished()
+	{
+		if (Hitbox != null)
+		{
+			Hitbox.Monitoring = false;
+		}
+	}
+
+	public void OnBodyEntered(Node3D node)
+	{
+		GD.Print("OnBodyEntered " + node.Name );
+		Health health = node.GetNode<Health>("Health");
+		if (health != null)
+		{
+			GD.Print("OnBodyEntered " + health.Name );
+		}
+	}
+	
 }

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://da8kw8omhpr2"]
+
+[ext_resource type="PackedScene" uid="uid://b6tjww8o27rml" path="res://assets/imported/Skull.glb" id="1_8t2th"]
+[ext_resource type="Material" uid="uid://dyokxotg8xwr8" path="res://assets/materials/character_material.tres" id="2_tjtjk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ib1hl"]
+animation = &"Idle"
+
+[node name="Skull_Inherited" unique_id=435014398 instance=ExtResource("1_8t2th")]
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1746445074) index="0" unique_id=939625091]
+bones/1/position = Vector3(-1.9834301e-08, -0.023556024, 0.45003957)
+bones/1/rotation = Quaternion(0.7111979, -1.04229294e-07, -1.2617144e-07, 0.7029919)
+bones/2/rotation = Quaternion(0.94797677, 5.2961052e-08, -1.814657e-07, 0.3183396)
+
+[node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=126862322]
+surface_material_override/0 = ExtResource("2_tjtjk")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=1678914401]
+tree_root = SubResource("AnimationNodeAnimation_ib1hl")
+anim_player = NodePath("../AnimationPlayer")

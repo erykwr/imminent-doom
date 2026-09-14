@@ -11,6 +11,9 @@
 radius = 0.49316406
 height = 1.7099609
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ib1hl"]
+radius = 0.35
+
 [node name="Hero" type="CharacterBody3D" unique_id=2090337248]
 
 [node name="Hero2" parent="." unique_id=175640064 instance=ExtResource("1_ud4mk")]
@@ -18,6 +21,14 @@ height = 1.7099609
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=348740540]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85498047, 0)
 shape = SubResource("CapsuleShape3D_ib1hl")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1683377293]
+monitoring = false
+monitorable = false
+
+[node name="HitShape" type="CollisionShape3D" parent="Hitbox" unique_id=1839771809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72239524, 0.9810896)
+shape = SubResource("SphereShape3D_ib1hl")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1583135236]
 script = ExtResource("2_rium6")
@@ -32,9 +43,13 @@ script = ExtResource("4_q8o41")
 [node name="Dash" type="Node" parent="StateMachine" unique_id=452030760]
 script = ExtResource("5_2c63q")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1989094703]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1989094703 node_paths=PackedStringArray("Hitbox")]
 script = ExtResource("6_w3da4")
+Hitbox = NodePath("../../Hitbox")
 
+[connection signal="AttackFinished" from="Hero2" to="StateMachine/Attack" method="HitFinished"]
+[connection signal="AttackStarted" from="Hero2" to="StateMachine/Attack" method="HitStarted"]
+[connection signal="body_entered" from="Hitbox" to="StateMachine/Attack" method="OnBodyEntered"]
 [connection signal="Transitioned" from="StateMachine/Idle" to="StateMachine" method="OnChildTransitioned"]
 [connection signal="Transitioned" from="StateMachine/Run" to="StateMachine" method="OnChildTransitioned"]
 [connection signal="Transitioned" from="StateMachine/Dash" to="StateMachine" method="OnChildTransitioned"]
