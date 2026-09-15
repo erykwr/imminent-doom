@@ -49,5 +49,6 @@ Source = NodePath("../Hero")
 [node name="Hero" parent="." unique_id=2090337248 instance=ExtResource("2_wdj6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0981975, 0, 1.3930922)
 
-[node name="Skull" parent="." unique_id=929058887 instance=ExtResource("3_l8qe7")]
+[node name="Skull" parent="." unique_id=929058887 node_paths=PackedStringArray("_camera") instance=ExtResource("3_l8qe7")]
 transform = Transform3D(-0.99634266, 0, 0.08544798, 0, 1, 0, -0.08544798, 0, -0.99634266, -4.5407143, 0, 4.830694)
+_camera = NodePath("../Camera3D")

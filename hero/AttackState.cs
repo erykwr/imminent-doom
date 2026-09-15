@@ -49,11 +49,10 @@ public partial class AttackState : State
 
 	public void OnBodyEntered(Node3D node)
 	{
-		GD.Print("OnBodyEntered " + node.Name );
 		Health health = node.GetNode<Health>("Health");
 		if (health != null)
 		{
-			GD.Print("OnBodyEntered " + health.Name );
+			health.TakeDamage(10.0f, CharacterBody3D);
 		}
 	}
 	
