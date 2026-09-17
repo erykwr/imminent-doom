@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cn6gdeuohwh3l" path="res://hero/RunState.cs" id="4_q8o41"]
 [ext_resource type="Script" uid="uid://m6itfkafm0wp" path="res://hero/DashState.cs" id="5_2c63q"]
 [ext_resource type="Script" uid="uid://jq1cg8i65ydx" path="res://hero/AttackState.cs" id="6_w3da4"]
+[ext_resource type="Script" uid="uid://b8l0wdsu2q0vl" path="res://common/Health.cs" id="7_w3da4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
 radius = 0.49316406
@@ -46,6 +47,10 @@ script = ExtResource("5_2c63q")
 [node name="Attack" type="Node" parent="StateMachine" unique_id=1989094703 node_paths=PackedStringArray("Hitbox")]
 script = ExtResource("6_w3da4")
 Hitbox = NodePath("../../Hitbox")
+
+[node name="Health" type="Node" parent="." unique_id=801635234]
+script = ExtResource("7_w3da4")
+MaxHealth = 10.0
 
 [connection signal="AttackFinished" from="Hero2" to="StateMachine/Attack" method="HitFinished"]
 [connection signal="AttackStarted" from="Hero2" to="StateMachine/Attack" method="HitStarted"]

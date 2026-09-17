@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dkbjfg1nk6qfh"]
 
+[ext_resource type="PackedScene" uid="uid://bauc8ibs30h72" path="res://hero/HUD.tscn" id="1_m1504"]
 [ext_resource type="Script" uid="uid://c61n460okyiy8" path="res://levels/CopyPosition.cs" id="2_l8qe7"]
 [ext_resource type="PackedScene" uid="uid://drcasr6buc55h" path="res://hero/Hero.tscn" id="2_wdj6m"]
 [ext_resource type="PackedScene" uid="uid://72cggqwxkkq" path="res://skull/Skull.tscn" id="3_l8qe7"]
+[ext_resource type="Script" uid="uid://cpr7p2nx4ysv4" path="res://levels/KillNode.cs" id="5_ifaiv"]
 
 [sub_resource type="Environment" id="Environment_ib1hl"]
 
@@ -10,6 +12,9 @@
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=743973824]
 environment = SubResource("Environment_ib1hl")
+
+[node name="Hud" parent="." unique_id=1440675273 node_paths=PackedStringArray("_hero") instance=ExtResource("1_m1504")]
+_hero = NodePath("../Hero")
 
 [node name="Mocked Character" type="CSGBox3D" parent="." unique_id=1306927728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -49,6 +54,9 @@ Source = NodePath("../Hero")
 [node name="Hero" parent="." unique_id=2090337248 instance=ExtResource("2_wdj6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0981975, 0, 1.3930922)
 
-[node name="Skull" parent="." unique_id=929058887 node_paths=PackedStringArray("_camera") instance=ExtResource("3_l8qe7")]
+[node name="Skull" parent="." unique_id=929058887 instance=ExtResource("3_l8qe7")]
 transform = Transform3D(-0.99634266, 0, 0.08544798, 0, 1, 0, -0.08544798, 0, -0.99634266, -4.5407143, 0, 4.830694)
-_camera = NodePath("../Camera3D")
+
+[node name="KillNode" type="Node" parent="." unique_id=894504305 node_paths=PackedStringArray("_characterBody3D")]
+script = ExtResource("5_ifaiv")
+_characterBody3D = NodePath("../Hero")

@@ -4,33 +4,21 @@ namespace imminent_doom.skull;
 
 public partial class Skull : CharacterBody3D
 {
-    [Export] private Node3D _healthBarAnchor;
-    [Export] private ProgressBar _healthBarUi;
-    [Export] private Camera3D _camera;
-    
-    public override void _Process(double delta)
-    {
-        UpdateHealthBarPosition();
-    }
+	[Export] public CollisionShape3D CollisionShape3D;
 
-    private void UpdateHealthBarPosition()
-    {
-        Vector3 worldPos = _healthBarAnchor.GlobalPosition;
+	public override void _Ready()
+	{
+		CollisionShape3D = GetNode<CollisionShape3D>("CollisionShape3D");
+	}
+	
+	private void Die()
+	{
+		SetPhysicsProcess(false);
+		CollisionShape3D?.SetDeferred(CollisionShape3D.PropertyName.Disabled, true);
 
-        Vector3 camLocal = _camera.GlobalTransform.AffineInverse() * worldPos;
-        if (camLocal.Z > 0)
-        {
-            _healthBarUi.Visible = false;
-            return;
-        }
+		var tween = CreateTween();
+		tween.TweenProperty(this, "scale", Scale * 0.05f, 0.3f);
+		tween.TweenCallback(Callable.From(QueueFree));
+	}
 
-        Vector2 screenPos = _camera.UnprojectPosition(worldPos);
-        _healthBarUi.Visible = true;
-        _healthBarUi.Position = screenPos - _healthBarUi.Size / 2f;
-    }
-
-    private void OnHealthChanged(float currentHealth, float maxHealth)
-    {
-        _healthBarUi.SetValue(currentHealth / maxHealth);
-    }
 }

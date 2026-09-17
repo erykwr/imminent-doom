@@ -19,7 +19,7 @@ public partial class CopyPosition : Camera3D
 		
 	}
 	
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if(Source == null) return;
 		SetGlobalPosition(Source.GlobalPosition + _offset);
