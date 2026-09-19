@@ -21,6 +21,7 @@ public sealed partial class EnemyAttackingState : EnemyState
 	public override void Exit()
 	{
 		Playback?.Travel("BlendSpace1D");
+		Hitbox?.SetMonitoring(false);
 	}
 
 	public override void PhysicsUpdate(float delta)

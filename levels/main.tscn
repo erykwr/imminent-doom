@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drcasr6buc55h" path="res://hero/Hero.tscn" id="2_wdj6m"]
 [ext_resource type="PackedScene" uid="uid://72cggqwxkkq" path="res://skull/Skull.tscn" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://cpr7p2nx4ysv4" path="res://levels/KillNode.cs" id="5_ifaiv"]
+[ext_resource type="PackedScene" uid="uid://d0xhvcj105mn1" path="res://ui/GameOverScreen.tscn" id="6_5k4jt"]
 
 [sub_resource type="Environment" id="Environment_ib1hl"]
 
@@ -60,9 +61,14 @@ Source = NodePath("../Hero")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0981975, 0, 1.3930922)
 
 [node name="Skull" parent="." unique_id=929058887 node_paths=PackedStringArray("Player") instance=ExtResource("3_l8qe7")]
-transform = Transform3D(-0.99634266, 0, 0.08544798, 0, 1, 0, -0.08544798, 0, -0.99634266, -4.5407143, 0, 4.830694)
+transform = Transform3D(-0.99634266, 0, 0.08544798, 0, 1, 0, -0.08544798, 0, -0.99634266, -4.5407143, 0, 11.522651)
 Player = NodePath("../Hero")
 
 [node name="KillNode" type="Node" parent="." unique_id=894504305 node_paths=PackedStringArray("_characterBody3D")]
 script = ExtResource("5_ifaiv")
 _characterBody3D = NodePath("../Hero")
+
+[node name="GameOverScreen" parent="." unique_id=1183275248 instance=ExtResource("6_5k4jt")]
+visible = false
+
+[connection signal="OnDeath" from="Hero" to="GameOverScreen" method="OnPlayerDied"]

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://drcasr6buc55h"]
 
+[ext_resource type="Script" uid="uid://t63ncoy0ysa1" path="res://hero/Hero.cs" id="1_2r6xx"]
 [ext_resource type="PackedScene" uid="uid://c58odmh8q0o0r" path="res://hero/hero_inherited.tscn" id="1_ud4mk"]
 [ext_resource type="Script" uid="uid://b5xkvbu35hqo2" path="res://hero/StateMachine.cs" id="2_rium6"]
 [ext_resource type="Script" uid="uid://buyjnopyu2crb" path="res://hero/IdleState.cs" id="3_r1hgc"]
@@ -16,6 +17,7 @@ height = 1.7099609
 radius = 0.35
 
 [node name="Hero" type="CharacterBody3D" unique_id=2090337248]
+script = ExtResource("1_2r6xx")
 
 [node name="Health" type="Node" parent="." unique_id=801635234]
 script = ExtResource("7_w3da4")
@@ -52,6 +54,7 @@ script = ExtResource("5_2c63q")
 script = ExtResource("6_w3da4")
 Hitbox = NodePath("../../Hitbox")
 
+[connection signal="Died" from="Health" to="." method="onDeath"]
 [connection signal="AttackFinished" from="Hero2" to="StateMachine/Attack" method="HitFinished"]
 [connection signal="AttackStarted" from="Hero2" to="StateMachine/Attack" method="HitStarted"]
 [connection signal="body_entered" from="Hitbox" to="StateMachine/Attack" method="OnBodyEntered"]
