@@ -31,29 +31,20 @@ public partial class AttackState : State
 		Playback?.Travel("BlendSpace1D");
 	}
 
-	public void HitStarted()
+	private void HitStarted()
 	{
-		if (Hitbox != null)
-		{
-			Hitbox.Monitoring = true;
-		}
+		Hitbox?.SetMonitoring(true);
 	}
 
-	public void HitFinished()
+	private void HitFinished()
 	{
-		if (Hitbox != null)
-		{
-			Hitbox.Monitoring = false;
-		}
+		Hitbox?.SetMonitoring(false);
 	}
 
-	public void OnBodyEntered(Node3D node)
+	private void OnBodyEntered(Node3D node)
 	{
 		Health health = node.GetNode<Health>("Health");
-		if (health != null)
-		{
-			health.TakeDamage(10.0f, CharacterBody3D);
-		}
+		health?.TakeDamage(10.0f, CharacterBody3D);
 	}
 	
 }

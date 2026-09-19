@@ -10,9 +10,15 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ib1hl"]
+
 [node name="Skull" type="CharacterBody3D" unique_id=929058887 node_paths=PackedStringArray("CollisionShape3D")]
 script = ExtResource("1_twbu4")
 CollisionShape3D = NodePath("CollisionShape3D")
+
+[node name="Health" type="Node" parent="." unique_id=1284188758]
+script = ExtResource("2_povog")
+MaxHealth = 10.0
 
 [node name="Skull_Inherited" parent="." unique_id=435014398 instance=ExtResource("1_d4ys3")]
 
@@ -20,9 +26,13 @@ CollisionShape3D = NodePath("CollisionShape3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ib1hl")
 
-[node name="Health" type="Node" parent="." unique_id=1284188758]
-script = ExtResource("2_povog")
-MaxHealth = 10.0
+[node name="Area3D" type="Area3D" parent="." unique_id=1211799254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0132489)
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1819751542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73719764, 0.024573326)
+shape = SubResource("SphereShape3D_ib1hl")
 
 [node name="StateMachine" type="Node" parent="." unique_id=886102951]
 script = ExtResource("4_3yo16")
@@ -34,11 +44,15 @@ script = ExtResource("5_l3yli")
 [node name="Approaching" type="Node" parent="StateMachine" unique_id=130437387]
 script = ExtResource("6_ysg6p")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1665652094]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1665652094 node_paths=PackedStringArray("Hitbox")]
 script = ExtResource("7_glfng")
+Hitbox = NodePath("../../Area3D")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=449132704]
 avoidance_enabled = true
 
 [connection signal="Died" from="Health" to="." method="Die"]
 [connection signal="HealthChanged" from="Health" to="." method="OnHealthChanged"]
+[connection signal="AttackFinished" from="Skull_Inherited" to="StateMachine/Attack" method="HitFinished"]
+[connection signal="AttackStarted" from="Skull_Inherited" to="StateMachine/Attack" method="HitStarted"]
+[connection signal="body_entered" from="Area3D" to="StateMachine/Attack" method="OnBodyEntered"]

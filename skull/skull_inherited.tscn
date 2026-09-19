@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b6tjww8o27rml" path="res://assets/imported/Skull.glb" id="1_8t2th"]
 [ext_resource type="Material" uid="uid://dyokxotg8xwr8" path="res://assets/materials/character_material.tres" id="2_tjtjk"]
+[ext_resource type="Script" uid="uid://c60s5bs7i7ojx" path="res://skull/SkullInherited.cs" id="2_xfdb7"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tjtjk"]
 animation = &"Attack"
@@ -36,11 +37,13 @@ states/Start/position = Vector2(172, 112)
 transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_naar0"), "BlendSpace1D", "Attack", SubResource("AnimationNodeStateMachineTransition_0gr5u"), "Attack", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_nmrnh")]
 
 [node name="Skull_Inherited" unique_id=435014398 instance=ExtResource("1_8t2th")]
+script = ExtResource("2_xfdb7")
 
 [node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(2018163232) index="0" unique_id=616885092]
-bones/1/position = Vector3(-6.2779354e-10, 0.041365884, 0.6958397)
-bones/1/rotation = Quaternion(0.7444722, -1.1090876e-07, -1.1915572e-07, 0.6676534)
-bones/2/rotation = Quaternion(0.99127364, 1.9409367e-08, -1.8405618e-07, 0.1318209)
+bones/1/position = Vector3(5.362463e-08, -0.22076721, 0.37536994)
+bones/1/rotation = Quaternion(0.6693626, -1.09053005e-07, -1.2103965e-07, 0.74293596)
+bones/1/scale = Vector3(1.0749562, 1.0749562, 1.0749562)
+bones/2/rotation = Quaternion(0.9517773, 5.0831286e-08, -1.8179865e-07, 0.30678985)
 
 [node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=834573346]
 surface_material_override/0 = ExtResource("2_tjtjk")
