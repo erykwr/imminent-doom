@@ -3,19 +3,49 @@
 [ext_resource type="PackedScene" uid="uid://b6tjww8o27rml" path="res://assets/imported/Skull.glb" id="1_8t2th"]
 [ext_resource type="Material" uid="uid://dyokxotg8xwr8" path="res://assets/materials/character_material.tres" id="2_tjtjk"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ib1hl"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tjtjk"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xfdb7"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4jtlq"]
+animation = &"Move"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_eap6m"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xfdb7")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"Idle"
+blend_point_1/node = SubResource("AnimationNodeAnimation_4jtlq")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"Move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_naar0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0gr5u"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nmrnh"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eyb0u"]
+states/Attack/node = SubResource("AnimationNodeAnimation_tjtjk")
+states/Attack/position = Vector2(464, 336)
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_eap6m")
+states/BlendSpace1D/position = Vector2(464, 112)
+states/Start/position = Vector2(172, 112)
+transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_naar0"), "BlendSpace1D", "Attack", SubResource("AnimationNodeStateMachineTransition_0gr5u"), "Attack", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_nmrnh")]
 
 [node name="Skull_Inherited" unique_id=435014398 instance=ExtResource("1_8t2th")]
 
-[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1746445074) index="0" unique_id=939625091]
-bones/1/position = Vector3(-1.9834301e-08, -0.023556024, 0.45003957)
-bones/1/rotation = Quaternion(0.7111979, -1.04229294e-07, -1.2617144e-07, 0.7029919)
-bones/2/rotation = Quaternion(0.94797677, 5.2961052e-08, -1.814657e-07, 0.3183396)
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(2018163232) index="0" unique_id=616885092]
+bones/1/position = Vector3(-6.2779354e-10, 0.041365884, 0.6958397)
+bones/1/rotation = Quaternion(0.7444722, -1.1090876e-07, -1.1915572e-07, 0.6676534)
+bones/2/rotation = Quaternion(0.99127364, 1.9409367e-08, -1.8405618e-07, 0.1318209)
 
-[node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=126862322]
+[node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=834573346]
 surface_material_override/0 = ExtResource("2_tjtjk")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=1678914401]
-tree_root = SubResource("AnimationNodeAnimation_ib1hl")
+tree_root = SubResource("AnimationNodeStateMachine_eyb0u")
 anim_player = NodePath("../AnimationPlayer")
+parameters/BlendSpace1D/blend_position = 0.0

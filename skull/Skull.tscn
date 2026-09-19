@@ -3,11 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://da8kw8omhpr2" path="res://skull/skull_inherited.tscn" id="1_d4ys3"]
 [ext_resource type="Script" uid="uid://o21w34sikxia" path="res://skull/Skull.cs" id="1_twbu4"]
 [ext_resource type="Script" uid="uid://b8l0wdsu2q0vl" path="res://common/Health.cs" id="2_povog"]
+[ext_resource type="Script" uid="uid://ddepvltlhiyqo" path="res://skull/EnemyStateMachine.cs" id="4_3yo16"]
+[ext_resource type="Script" uid="uid://bsv0ekk6dyuku" path="res://skull/EnemyIdleState.cs" id="5_l3yli"]
+[ext_resource type="Script" uid="uid://cqle2qxuvjnp1" path="res://skull/EnemyApproachingState.cs" id="6_ysg6p"]
+[ext_resource type="Script" uid="uid://2xxhp64k8jc4" path="res://skull/EnemyAttackingState.cs" id="7_glfng"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
 
-[node name="Skull" type="CharacterBody3D" unique_id=929058887]
+[node name="Skull" type="CharacterBody3D" unique_id=929058887 node_paths=PackedStringArray("CollisionShape3D")]
 script = ExtResource("1_twbu4")
+CollisionShape3D = NodePath("CollisionShape3D")
 
 [node name="Skull_Inherited" parent="." unique_id=435014398 instance=ExtResource("1_d4ys3")]
 
@@ -18,6 +23,22 @@ shape = SubResource("CapsuleShape3D_ib1hl")
 [node name="Health" type="Node" parent="." unique_id=1284188758]
 script = ExtResource("2_povog")
 MaxHealth = 10.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=886102951]
+script = ExtResource("4_3yo16")
+InitialStatePath = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=384361301]
+script = ExtResource("5_l3yli")
+
+[node name="Approaching" type="Node" parent="StateMachine" unique_id=130437387]
+script = ExtResource("6_ysg6p")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1665652094]
+script = ExtResource("7_glfng")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=449132704]
+avoidance_enabled = true
 
 [connection signal="Died" from="Health" to="." method="Die"]
 [connection signal="HealthChanged" from="Health" to="." method="OnHealthChanged"]

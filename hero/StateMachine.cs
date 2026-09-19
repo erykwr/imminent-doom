@@ -36,9 +36,7 @@ public partial class StateMachine : Node
 
 	private void OnChildTransitioned(State state, string newStateName)
 	{
-		GD.Print("OnChildTransitioned attempt to change from "+ state.Name + " to "+ newStateName);
 		if (state != _currentState || !_states.TryGetValue(newStateName, out State newState)) return;
-		GD.Print("OnChildTransitioned changing from "+ state.Name + " to "+ newStateName);
 
 		_currentState.Exit();
 		newState.Enter();

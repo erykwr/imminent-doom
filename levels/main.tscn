@@ -8,6 +8,10 @@
 
 [sub_resource type="Environment" id="Environment_ib1hl"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_ib1hl"]
+vertices = PackedVector3Array(-1, -0.5522995, -5.101654, 0.25, -0.5522995, -5.351654, 0.25, -0.5522995, -24.101654, -24.25, -0.5522995, -24.101654, -24.25, -0.5522995, -3.851654, -1, -0.5522995, -3.601654, 1.25, -0.5522995, -5.101654, 24.5, -0.5522995, -3.851654, 24.5, -0.5522995, -24.101654, 1.25, -0.5522995, -3.601654, -24.25, -0.5522995, 3.898346, -1, -0.5522995, 3.648346, 1.25, -0.5522995, 3.648346, 24.5, -0.5522995, 3.898346, 0.25, -0.5522995, 24.648346, 0.25, -0.5522995, 5.398346, -1, -0.5522995, 5.148346, -24.25, -0.5522995, 24.648346, 1.25, -0.5522995, 5.148346, 24.5, -0.5522995, 24.648346)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(1, 2, 6), PackedInt32Array(6, 2, 8), PackedInt32Array(6, 8, 7), PackedInt32Array(7, 9, 6), PackedInt32Array(11, 10, 5), PackedInt32Array(5, 10, 4), PackedInt32Array(9, 7, 12), PackedInt32Array(12, 7, 13), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(16, 17, 10), PackedInt32Array(10, 11, 16), PackedInt32Array(15, 18, 14), PackedInt32Array(14, 18, 19), PackedInt32Array(19, 18, 13), PackedInt32Array(18, 12, 13)]
+
 [node name="Node3D" type="Node3D" unique_id=1343320943]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=743973824]
@@ -16,31 +20,32 @@ environment = SubResource("Environment_ib1hl")
 [node name="Hud" parent="." unique_id=1440675273 node_paths=PackedStringArray("_hero") instance=ExtResource("1_m1504")]
 _hero = NodePath("../Hero")
 
-[node name="Mocked Character" type="CSGBox3D" parent="." unique_id=1306927728]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=755178264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.14834595)
+navigation_mesh = SubResource("NavigationMesh_ib1hl")
+
+[node name="Barrier" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1306927728]
 use_collision = true
-size = Vector3(1, 2, 1)
+size = Vector3(1, 2, 9.525452)
 
-[node name="Level" type="Node3D" parent="." unique_id=535291944]
-
-[node name="Wall_001" type="CSGBox3D" parent="Level" unique_id=1818251483]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 25.5)
+[node name="Wall_001" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1818251483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.648346)
 size = Vector3(50, 2, 1)
 
-[node name="Wall_002" type="CSGBox3D" parent="Level" unique_id=2077356892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25.5)
+[node name="Wall_002" type="CSGBox3D" parent="NavigationRegion3D" unique_id=2077356892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.351654)
 size = Vector3(50, 2, 1)
 
-[node name="Wall_003" type="CSGBox3D" parent="Level" unique_id=516965921]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 1, 0)
+[node name="Wall_003" type="CSGBox3D" parent="NavigationRegion3D" unique_id=516965921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 0.14834595)
 size = Vector3(1, 2, 50)
 
-[node name="Wall_004" type="CSGBox3D" parent="Level" unique_id=1910161125]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 1, 0)
+[node name="Wall_004" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1910161125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 0, 0.14834595)
 size = Vector3(1, 2, 50)
 
-[node name="Floor" type="CSGBox3D" parent="Level" unique_id=1746779724]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888674, -0.5522995, -0.012463093)
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1746779724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888674, -1.5522995, 0.13588285)
 size = Vector3(50, 1, 50)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1650723946]
@@ -54,8 +59,9 @@ Source = NodePath("../Hero")
 [node name="Hero" parent="." unique_id=2090337248 instance=ExtResource("2_wdj6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0981975, 0, 1.3930922)
 
-[node name="Skull" parent="." unique_id=929058887 instance=ExtResource("3_l8qe7")]
+[node name="Skull" parent="." unique_id=929058887 node_paths=PackedStringArray("Player") instance=ExtResource("3_l8qe7")]
 transform = Transform3D(-0.99634266, 0, 0.08544798, 0, 1, 0, -0.08544798, 0, -0.99634266, -4.5407143, 0, 4.830694)
+Player = NodePath("../Hero")
 
 [node name="KillNode" type="Node" parent="." unique_id=894504305 node_paths=PackedStringArray("_characterBody3D")]
 script = ExtResource("5_ifaiv")
