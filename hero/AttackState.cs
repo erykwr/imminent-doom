@@ -1,5 +1,6 @@
 using Godot;
 using imminent_doom.common;
+using imminent_doom.levels;
 
 namespace imminent_doom.hero;
 
@@ -31,9 +32,12 @@ public partial class AttackState : State
 		Playback?.Travel("BlendSpace1D");
 		Hitbox?.SetMonitoring(false);
 	}
+	
+	private bool _hasShaken;
 
 	private void HitStarted()
 	{
+		_hasShaken = false;
 		Hitbox?.SetMonitoring(true);
 	}
 
@@ -46,6 +50,10 @@ public partial class AttackState : State
 	{
 		Health health = node.GetNode<Health>("Health");
 		health?.TakeDamage(10.0f, CharacterBody3D);
+		
+		if (_hasShaken) return;
+		_hasShaken = true;
+		(Camera as CopyPosition)?.Shake();
 	}
 	
 }
