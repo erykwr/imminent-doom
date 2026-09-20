@@ -6,6 +6,11 @@
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tjtjk"]
 animation = &"Attack"
+use_custom_timeline = true
+timeline_length = 2.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xfdb7"]
 animation = &"Idle"
@@ -40,9 +45,9 @@ transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTr
 script = ExtResource("2_xfdb7")
 
 [node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(2018163232) index="0" unique_id=616885092]
-bones/1/position = Vector3(-2.090524e-08, -0.020865154, 0.4817211)
-bones/1/rotation = Quaternion(0.7160377, -1.03889384e-07, -1.2649664e-07, 0.69806165)
-bones/2/rotation = Quaternion(0.95691687, 4.781653e-08, -1.822326e-07, 0.29036203)
+bones/1/position = Vector3(1.991037e-08, 0.036762904, 0.69107443)
+bones/1/rotation = Quaternion(0.74358845, -1.2114593e-07, -1.089349e-07, 0.66863763)
+bones/2/rotation = Quaternion(0.9901947, 2.0792811e-08, -1.8406352e-07, 0.13969436)
 
 [node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=834573346]
 surface_material_override/0 = ExtResource("2_tjtjk")

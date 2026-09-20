@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 
 namespace imminent_doom.skull;
@@ -39,11 +38,6 @@ public partial class EnemyState : Node
 		Playback = AnimationTree?.Get("parameters/playback").As<AnimationNodeStateMachinePlayback>();
 
 		NavAgent = GetNode<NavigationAgent3D>(NavigationAgentPath);
-
-		if (Player == null)
-		{
-			GD.PrintErr("Player not set");
-		}
 	}
 
 	public virtual void Enter() { }

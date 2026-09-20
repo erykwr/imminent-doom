@@ -6,12 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://72cggqwxkkq" path="res://skull/Skull.tscn" id="3_l8qe7"]
 [ext_resource type="Script" uid="uid://cpr7p2nx4ysv4" path="res://levels/KillNode.cs" id="5_ifaiv"]
 [ext_resource type="PackedScene" uid="uid://d0xhvcj105mn1" path="res://ui/GameOverScreen.tscn" id="6_5k4jt"]
+[ext_resource type="Script" uid="uid://p020iiq4k0y0" path="res://levels/EnemySpawner.cs" id="7_qy63d"]
 
 [sub_resource type="Environment" id="Environment_ib1hl"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ib1hl"]
 vertices = PackedVector3Array(-1, -0.5522995, -5.101654, 0.25, -0.5522995, -5.351654, 0.25, -0.5522995, -24.101654, -24.25, -0.5522995, -24.101654, -24.25, -0.5522995, -3.851654, -1, -0.5522995, -3.601654, 1.25, -0.5522995, -5.101654, 24.5, -0.5522995, -3.851654, 24.5, -0.5522995, -24.101654, 1.25, -0.5522995, -3.601654, -24.25, -0.5522995, 3.898346, -1, -0.5522995, 3.648346, 1.25, -0.5522995, 3.648346, 24.5, -0.5522995, 3.898346, 0.25, -0.5522995, 24.648346, 0.25, -0.5522995, 5.398346, -1, -0.5522995, 5.148346, -24.25, -0.5522995, 24.648346, 1.25, -0.5522995, 5.148346, 24.5, -0.5522995, 24.648346)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(1, 2, 6), PackedInt32Array(6, 2, 8), PackedInt32Array(6, 8, 7), PackedInt32Array(7, 9, 6), PackedInt32Array(11, 10, 5), PackedInt32Array(5, 10, 4), PackedInt32Array(9, 7, 12), PackedInt32Array(12, 7, 13), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(16, 17, 10), PackedInt32Array(10, 11, 16), PackedInt32Array(15, 18, 14), PackedInt32Array(14, 18, 19), PackedInt32Array(19, 18, 13), PackedInt32Array(18, 12, 13)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ib1hl"]
+size = Vector3(48.681458, 2.5759277, 48.483765)
 
 [node name="Node3D" type="Node3D" unique_id=1343320943]
 
@@ -70,5 +74,15 @@ _characterBody3D = NodePath("../Hero")
 
 [node name="GameOverScreen" parent="." unique_id=1183275248 instance=ExtResource("6_5k4jt")]
 visible = false
+
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=688075504 node_paths=PackedStringArray("SpawnBox", "Target")]
+script = ExtResource("7_qy63d")
+EnemyScene = ExtResource("3_l8qe7")
+SpawnBox = NodePath("CollisionShape3D")
+Target = NodePath("../Hero")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemySpawner" unique_id=2109486648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123809814, 1.732553, -0.12384033)
+shape = SubResource("BoxShape3D_ib1hl")
 
 [connection signal="OnDeath" from="Hero" to="GameOverScreen" method="OnPlayerDied"]
