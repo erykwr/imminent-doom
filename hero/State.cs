@@ -109,6 +109,10 @@ public partial class State : Node
 		
 		Vector2 horizontalVelocity = new Vector2(CharacterBody3D.Velocity.X, CharacterBody3D.Velocity.Z);
 		float speed = Mathf.Clamp(horizontalVelocity.Length() / Speed, 0f, 1f);
+		if (speed < 0.05f)
+		{
+			speed = 0f;
+		}
 		AnimationTree.Set("parameters/BlendSpace1D/blend_position", speed);
 	}
 	

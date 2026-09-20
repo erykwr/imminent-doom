@@ -8,6 +8,16 @@
 [ext_resource type="Script" uid="uid://m6itfkafm0wp" path="res://hero/DashState.cs" id="5_2c63q"]
 [ext_resource type="Script" uid="uid://jq1cg8i65ydx" path="res://hero/AttackState.cs" id="6_w3da4"]
 [ext_resource type="Script" uid="uid://b8l0wdsu2q0vl" path="res://common/Health.cs" id="7_w3da4"]
+[ext_resource type="AudioStream" uid="uid://dif10f0phra5e" path="res://assets/sounds/footstep00.ogg" id="9_odjco"]
+[ext_resource type="AudioStream" uid="uid://bnu74p5pdkain" path="res://assets/sounds/footstep01.ogg" id="11_tl436"]
+[ext_resource type="AudioStream" uid="uid://b8egmb6r6dun2" path="res://assets/sounds/footstep02.ogg" id="12_m4071"]
+[ext_resource type="AudioStream" uid="uid://c66h3bt2s4nsu" path="res://assets/sounds/footstep03.ogg" id="13_a76f3"]
+[ext_resource type="AudioStream" uid="uid://4g6ukvln1lx3" path="res://assets/sounds/footstep04.ogg" id="14_jhp8m"]
+[ext_resource type="AudioStream" uid="uid://cd1df3app1805" path="res://assets/sounds/footstep05.ogg" id="15_bvoij"]
+[ext_resource type="AudioStream" uid="uid://cirmri6mgeuof" path="res://assets/sounds/footstep06.ogg" id="16_ebggi"]
+[ext_resource type="AudioStream" uid="uid://bhrqponqxu36d" path="res://assets/sounds/footstep07.ogg" id="17_pjvnq"]
+[ext_resource type="AudioStream" uid="uid://c4217ysa2iddk" path="res://assets/sounds/footstep08.ogg" id="18_2gngg"]
+[ext_resource type="AudioStream" uid="uid://ca3ldxsyhlpll" path="res://assets/sounds/footstep09.ogg" id="19_mo4xb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1hl"]
 radius = 0.49316406
@@ -15,6 +25,20 @@ height = 1.7099609
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ib1hl"]
 radius = 0.35
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ajely"]
+random_pitch = 1.0656005
+streams_count = 10
+stream_0/stream = ExtResource("9_odjco")
+stream_1/stream = ExtResource("11_tl436")
+stream_2/stream = ExtResource("12_m4071")
+stream_3/stream = ExtResource("13_a76f3")
+stream_4/stream = ExtResource("14_jhp8m")
+stream_5/stream = ExtResource("15_bvoij")
+stream_6/stream = ExtResource("16_ebggi")
+stream_7/stream = ExtResource("17_pjvnq")
+stream_8/stream = ExtResource("18_2gngg")
+stream_9/stream = ExtResource("19_mo4xb")
 
 [node name="Hero" type="CharacterBody3D" unique_id=2090337248]
 script = ExtResource("1_2r6xx")
@@ -54,9 +78,13 @@ script = ExtResource("5_2c63q")
 script = ExtResource("6_w3da4")
 Hitbox = NodePath("../../Hitbox")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1151108615]
+stream = SubResource("AudioStreamRandomizer_ajely")
+
 [connection signal="Died" from="Health" to="." method="onDeath"]
 [connection signal="AttackFinished" from="Hero2" to="StateMachine/Attack" method="HitFinished"]
 [connection signal="AttackStarted" from="Hero2" to="StateMachine/Attack" method="HitStarted"]
+[connection signal="FootStep" from="Hero2" to="AudioStreamPlayer3D" method="play"]
 [connection signal="body_entered" from="Hitbox" to="StateMachine/Attack" method="OnBodyEntered"]
 [connection signal="Transitioned" from="StateMachine/Idle" to="StateMachine" method="OnChildTransitioned"]
 [connection signal="Transitioned" from="StateMachine/Run" to="StateMachine" method="OnChildTransitioned"]
