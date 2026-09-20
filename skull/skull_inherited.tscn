@@ -40,10 +40,9 @@ transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTr
 script = ExtResource("2_xfdb7")
 
 [node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(2018163232) index="0" unique_id=616885092]
-bones/1/position = Vector3(5.362463e-08, -0.22076721, 0.37536994)
-bones/1/rotation = Quaternion(0.6693626, -1.09053005e-07, -1.2103965e-07, 0.74293596)
-bones/1/scale = Vector3(1.0749562, 1.0749562, 1.0749562)
-bones/2/rotation = Quaternion(0.9517773, 5.0831286e-08, -1.8179865e-07, 0.30678985)
+bones/1/position = Vector3(-2.090524e-08, -0.020865154, 0.4817211)
+bones/1/rotation = Quaternion(0.7160377, -1.03889384e-07, -1.2649664e-07, 0.69806165)
+bones/2/rotation = Quaternion(0.95691687, 4.781653e-08, -1.822326e-07, 0.29036203)
 
 [node name="Skull" parent="Armature/Skeleton3D" index="0" unique_id=834573346]
 surface_material_override/0 = ExtResource("2_tjtjk")

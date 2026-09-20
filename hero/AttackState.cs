@@ -1,6 +1,7 @@
 using Godot;
 using imminent_doom.common;
 using imminent_doom.levels;
+using imminent_doom.skull;
 
 namespace imminent_doom.hero;
 
@@ -50,7 +51,8 @@ public partial class AttackState : State
 	{
 		Health health = node.GetNode<Health>("Health");
 		if (health == null) return;
-		Juice.HitStop(GetTree(),0.05f, 0.2f);
+		Juice.HitStop(GetTree());
+		(node as Skull)?.Flash();
 		health.TakeDamage(10.0f, CharacterBody3D);
 		
 		if (_hasShaken) return;
