@@ -49,7 +49,9 @@ public partial class AttackState : State
 	private void OnBodyEntered(Node3D node)
 	{
 		Health health = node.GetNode<Health>("Health");
-		health?.TakeDamage(10.0f, CharacterBody3D);
+		if (health == null) return;
+		Juice.HitStop(GetTree(),0.05f, 0.2f);
+		health.TakeDamage(10.0f, CharacterBody3D);
 		
 		if (_hasShaken) return;
 		_hasShaken = true;
