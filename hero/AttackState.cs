@@ -26,6 +26,32 @@ public partial class AttackState : State
 
 	public override void UpdateMovement(float delta)
 	{
+		
+		Vector2 inputDir = Input.GetVector(
+			"ui_left",
+			"ui_right",
+			"ui_up",
+			"ui_down"
+		);
+
+		Vector3 camForward = -Camera.GlobalTransform.Basis.Z;
+		Vector3 camRight = Camera.GlobalTransform.Basis.X;
+		camForward.Y = 0;
+		camForward = camForward.Normalized();
+		camRight.Y = 0;
+		camRight = camRight.Normalized();
+
+		Vector3 direction = (camRight * inputDir.X + camForward * -inputDir.Y);
+		if (direction.Length() > 0.01f)
+		{
+			direction = direction.Normalized();
+			float targetAngle = Mathf.Atan2(direction.X, direction.Z);
+			CharacterBody3D.Rotation = new Vector3(
+				CharacterBody3D.Rotation.X,
+				Mathf.LerpAngle(CharacterBody3D.Rotation.Y, targetAngle, RotationSpeed * delta),
+				CharacterBody3D.Rotation.Z
+			);
+		}
 	}
 
 	public override void Exit()
